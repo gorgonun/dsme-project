@@ -33,9 +33,10 @@ export default class MainPage extends React.Component {
           height: '100%',
           flexDirection: 'column',
           alignItems: 'center',
+          padding: '5%',
         }}>
-        <Text>Fantastic Controller</Text>
-        <View style={{justifyContent: 'center',width: '100%', height: '100%'}}>
+        <Text style={{ fontSize: 30}}>Fantastic Controller</Text>
+        <View style={{justifyContent: 'center', width: '100%', height: '100%'}}>
           {this.state.devices && this.state.devices.length > 0
             ? this.state.devices.map(device => {
                 return (
@@ -44,13 +45,18 @@ export default class MainPage extends React.Component {
                       flexDirection: 'column'
                     }} key={device.device_id}>
                     <View>
-                      <Text>
+                      <Text style={{ fontSize: 30}}>
                         {device.device_name ? device.device_name : "No named device"}
                       </Text>
                     </View>
                     <View>
-                      <Button onPress={()=>this.ativarDispositivo(device)} style={{backgroundColor: device.active? "red":"green"}} title={device.active ? "Ativar" : "Desativar"}>
+                      <Button onPress={()=>this.ativarDispositivo(device)} style={{backgroundColor: device.active? "red":"green"}} title={device.active ? "Desativar": "Ativar"}>
                       </Button>
+                      <Text>
+                      Id: {device.device_id}{"\n"}
+                      Ultima temperatura registrada: {device.temperature ? device.temperature : 11.2}{"\n"}
+                      Ativo: {device.active ? "Sim" : "Nao"}{"\n"}
+                      </Text>
                     </View>
                   </View>
                 );
