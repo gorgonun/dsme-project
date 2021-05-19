@@ -18,13 +18,12 @@ export default class MainPage extends React.Component {
   }
 
   async ativarDispositivo(device){
+    console.log(1);
    device.active = !device.active;
    await DeviceService.patch(device);
    const devices = await DeviceService.getAll(); 
    this.setState({devices});
   }
-
-  async beforeMount() {}
 
   render() {
     return (
@@ -32,33 +31,32 @@ export default class MainPage extends React.Component {
         style={{
           width: '100%',
           height: '100%',
-          flexDirection: 'row',
-          justifyContent: 'center',
+          flexDirection: 'column',
           alignItems: 'center',
         }}>
-        {this.state.devices && this.state.devices.length > 0
-          ? this.state.devices.map(device => {
-              return (
-                <View
-                  style={{
-                    height: '100%',
-                    width: '100%',
-                    flexDirection: 'row'
-                  }} key={device.device_id}>
-                  <View style={{flex: 8}}>
-                    <Text>
-                      {device.name}
+        <Text>Fantastic Controller</Text>
+        <View style={{justifyContent: 'center',width: '100%', height: '100%'}}>
+          {this.state.devices && this.state.devices.length > 0
+            ? this.state.devices.map(device => {
+                return (
+                  <View
+                    style={{
+                      flexDirection: 'column'
+                    }} key={device.device_id}>
+                    <View>
+                      <Text>
+                        {device.device_name ? device.device_name : "No named device"}
                       </Text>
+                    </View>
+                    <View>
+                      <Button onClick={()=>ativarDispositivo(device)} style={{backgroundColor: device.active? "red":"green"}} title={device.active ? "Ativar" : "Desativar"}>
+                      </Button>
+                    </View>
                   </View>
-                  <View style={{flex: 2}}>
-                    <Button onClick={()=>ativarDispositivo(device)} style={{backgroundColor: device.active? "red":"green"}} title={device.active ? "Ativar" : "Desativar"}>
-                    </Button>
-                  </View>
-                </View>
-              );
-            })
-          : null}
-        <Text>MainPage</Text>
+                );
+              })
+            : null}
+        </View>
       </View>
     );
   }
