@@ -49,7 +49,7 @@ export default class MainPage extends React.Component {
                       </Text>
                     </View>
                     <View>
-                      <Button onClick={()=>ativarDispositivo(device)} style={{backgroundColor: device.active? "red":"green"}} title={device.active ? "Ativar" : "Desativar"}>
+                      <Button onPress={()=>this.ativarDispositivo(device)} style={{backgroundColor: device.active? "red":"green"}} title={device.active ? "Ativar" : "Desativar"}>
                       </Button>
                     </View>
                   </View>
